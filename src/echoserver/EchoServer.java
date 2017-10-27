@@ -26,7 +26,6 @@ public class EchoServer {
         	b = (byte)i;
         	output.write(b);
 		//check for more input
-        	//System.out.println(b);
         	i = input.read();
 	}
       	

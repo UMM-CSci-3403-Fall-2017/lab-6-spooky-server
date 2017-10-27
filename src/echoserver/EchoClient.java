@@ -11,6 +11,7 @@ public class EchoClient {
       
       //initialize streams and byte var
       InputStream stdIn = System.in;
+      OutputStream stdOut = System.out;
       InputStream serverIn = socket.getInputStream();
       OutputStream output = socket.getOutputStream();
       byte b;
@@ -24,15 +25,17 @@ public class EchoClient {
 	output.write(b);
 	//read, store, and print response byte
         b =(byte)serverIn.read();
-	System.out.println(b);
+	stdOut.write(b);
 	//check for more input
 	i = stdIn.read();
       }
       
-      //close streams
-      stdIn.close();
-      serverIn.close();
+      //close/flush streams
       output.flush();
+      stdOut.flush();
+      stdIn.close();
+      stdOut.close();
+      serverIn.close();
       output.close();
       socket.close();
 
